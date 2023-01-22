@@ -4,10 +4,10 @@ import data from "./data";
 
 function TableData() {
   const [product, setProduct] = useState(data);
-  const [display, setDisplay] = useState();
+  const [isShown, setIsShown] = useState(false);
 
-  function handleOnClick() {
-    setDisplay();
+  function handleOnClick(event) {
+    setIsShown(true);
   }
   
   const tableRows = product.map((data, index) => {
@@ -48,12 +48,14 @@ function TableData() {
       </div>
       <div className="text-center mt-5">
         <button onClick={handleOnClick} className='px-10 border-2'>Intrare Noua</button>
-        </div>
-        <div>
-        <AddNewProduct func={addRows} />
+          <div>
+            {
+              isShown && (
+                <AddNewProduct func={addRows} />
+              )}
+          </div>
       </div>
     </div>
-    
   );
 }
   
