@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AddNewProduct from "./AddNewProduct";
 import data from "./data";
- 
 
 function TableData() {
   const [product, setProduct] = useState(data);
@@ -35,7 +34,18 @@ function TableData() {
     updatedProduct.push(data);
     setProduct(updatedProduct);
   };
-  
+
+  function searchName() {
+    data
+        .filter((produs) =>{
+            return (
+                search.toLowerCase() === "" 
+              ? produs 
+              : produs.numeProdus.toLowerCase().includes(searchInput)
+        )})
+        return {tableRows};
+    };
+
   return (
     <div>
       <div>
@@ -52,7 +62,7 @@ function TableData() {
                   NumeProdus
                 <input 
                 className="border-2 mb-2" 
-                  onChange={handleOnChangeSearch}></input>
+                  onChange={searchName}></input>
               </th>
               <th 
                 className="border-2">
@@ -76,7 +86,9 @@ function TableData() {
               </th>
             </tr>
          </thead>
-          <tbody>{tableRows}</tbody>
+          <tbody>
+            {tableRows}
+          </tbody>
         </table>
       </div>
       <div className="text-center mt-5">
