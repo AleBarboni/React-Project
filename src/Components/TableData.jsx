@@ -6,6 +6,8 @@ function TableData() {
   const [product, setProduct] = useState(data);
   const [isShown, setIsShown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [order, setOrder] = useState("ASC");
+
 
   function handleOnClick(event) {
     setIsShown(true);
@@ -17,6 +19,33 @@ function TableData() {
     const updatedProduct = [...product];
     updatedProduct.push(data);
     setProduct(updatedProduct);
+  };
+
+  function tableRows(data) {
+    return (
+      <tr key={data.id}>
+        <td className="text-center border-2 px-10 text-start">{data.numeProdus}</td>
+        <td className="text-center border-2">{data.otc}</td>
+        <td className="text-center border-2">{data.stoc}</td>
+        <td className="text-center border-2">{data.pret}</td>
+        <td className="text-center border-2">{data.dataExpirarii}</td>
+      </tr>
+    )
+  } 
+ 
+  const sorting = (col) => {
+    if (order === "ASC") {
+      const sorted = [...product].sort((a, b) => 
+      a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1);
+    setProduct(sorted);
+    setOrder("DSC");
+    }
+    if (order === "DSC") {
+      const sorted = [...product].sort((a, b) => 
+      a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1);
+    setProduct(sorted);
+    setOrder("ASC");
+    } 
   };
 
   return (
@@ -34,30 +63,23 @@ function TableData() {
                 className="border-2 pr-96 px-10 text-start">
                   NumeProdus
                 <input 
-                  className="border-2 mb-2" 
+                  className="border-2 m-2 px-2"
+                  placeholder="Cauta produs...." 
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
               </th>
               <th 
-                className="border-2">
-                  OTC
-                <input className="border-2 w-16 mb-2" type="text"/>
-              </th>
+                className="border-2 px-10"
+                onClick={() => sorting("otc")}>OTC</th>
               <th 
-                className="border-2">
-                  Stoc
-                <input className="border-2 w-16 mb-2 " type="number" min="0"></input>
-              </th>
+                className="border-2 px-10"
+                onClick={() => sorting("stoc")}>Stoc</th>
               <th 
-                className="border-2 unstyled">
-                  Pret
-                <input className="border-2 mb-2" type="number" min="0"></input>
-              </th>
+                className="border-2 unstyled px-10"
+                onClick={() => sorting("pret")}>Pret</th>
               <th 
-                className="border-2">
-                  DataExpirarii
-                <input className="border-2 mb-2" type="date"></input>
-              </th>
+                className="border-2 px-10"
+                onClick={() => sorting("dataExpirarii")}>DataExpirarii</th>
             </tr>
          </thead>
           <tbody>
@@ -67,14 +89,8 @@ function TableData() {
               } else if (product.numeProdus.toLowerCase().includes(searchInput.toLowerCase())) {
                 return product
               }
-            }).map((p) => (
-              <tr key={p.index}>
-                <td className="text-center border-2 px-10 text-start">{p.numeProdus}</td>
-                <td className="text-center border-2">{p.otc}</td>
-                <td className="text-center border-2">{p.stoc}</td>
-                <td className="text-center border-2">{p.pret}</td>
-                <td className="text-center border-2">{p.dataExpirarii}</td>
-              </tr>
+            }).map((data) => (
+              tableRows(data)
             ))}
           </tbody>
         </table>
