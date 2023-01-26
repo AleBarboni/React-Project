@@ -11,22 +11,6 @@ function TableData() {
     setIsShown(true);
   }
   
-  function handleOnChangeSearch(event) {
-    setSearchInput(event.target.value);
-  }
-
-  const tableRows = product.map((data, index) => {
-    return (
-      <tr key={index}>
-        <td className="text-center border-2 px-10 text-start">{data.numeProdus}</td>
-        <td className="text-center border-2">{data.otc}</td>
-        <td className="text-center border-2">{data.stoc}</td>
-        <td className="text-center border-2">{data.pret}</td>
-        <td className="text-center border-2">{data.dataExpirarii}</td>
-      </tr>
-    );
-  });
-
   const addRows = (data) => {
     const totalProducts = product.length;
     data.id = totalProducts + 1;
@@ -34,17 +18,6 @@ function TableData() {
     updatedProduct.push(data);
     setProduct(updatedProduct);
   };
-
-  function searchName() {
-    data
-        .filter((produs) =>{
-            return (
-                search.toLowerCase() === "" 
-              ? produs 
-              : produs.numeProdus.toLowerCase().includes(searchInput)
-        )})
-        return {tableRows};
-    };
 
   return (
     <div>
@@ -61,13 +34,14 @@ function TableData() {
                 className="border-2 pr-96 px-10 text-start">
                   NumeProdus
                 <input 
-                className="border-2 mb-2" 
-                  onChange={searchName}></input>
+                  className="border-2 mb-2" 
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
               </th>
               <th 
                 className="border-2">
                   OTC
-                <input className="border-2 w-16 mb-2" type="text"></input>
+                <input className="border-2 w-16 mb-2" type="text"/>
               </th>
               <th 
                 className="border-2">
@@ -87,7 +61,21 @@ function TableData() {
             </tr>
          </thead>
           <tbody>
-            {tableRows}
+            {data.filter((product) => {
+              if (searchInput === "") {
+                return product;
+              } else if (product.numeProdus.toLowerCase().includes(searchInput.toLowerCase())) {
+                return product
+              }
+            }).map((p) => (
+              <tr key={p.index}>
+                <td className="text-center border-2 px-10 text-start">{p.numeProdus}</td>
+                <td className="text-center border-2">{p.otc}</td>
+                <td className="text-center border-2">{p.stoc}</td>
+                <td className="text-center border-2">{p.pret}</td>
+                <td className="text-center border-2">{p.dataExpirarii}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
