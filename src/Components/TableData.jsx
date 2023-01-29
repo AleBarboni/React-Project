@@ -1,76 +1,20 @@
 import { useEffect, useState } from "react";
-import AddNewProduct from "./AddNewProduct";
+import Table from "./Table";
 import data from "./data";
-
-/** de pus in alt fisier, este componenta ce contine doar tabelul */
-function Table({productList, handleSortClick, handleSearchChange, searchInput}){
-
-  function tableRows(data) {
-    return (
-      <tr key={data.id}>
-        <td className="text-center border-2 px-10 text-start">{data.numeProdus}</td>
-        <td className="text-center border-2">{data.otc}</td>
-        <td className="text-center border-2">{data.stoc}</td>
-        <td className="text-center border-2">{data.pret}</td>
-        <td className="text-center border-2">{data.dataExpirarii}</td>
-      </tr>
-    )
-  }
-
-  return (
-    <table className="table-auto text-center w-full">
-    <thead>
-      <tr>
-        <th
-          className="border-2 pr-96 px-10 text-start"
-          onClick={() => handleSortClick("numeProdus")}
-        >
-          NumeProdus
-          <input
-            className="border-2 m-2 px-2"
-            placeholder="Cauta produs...."
-            onChange={handleSearchChange}
-          />
-        </th>
-        <th
-          className="border-2 px-10"
-          onClick={() => handleSortClick("otc")}>OTC</th>
-        <th
-          className="border-2 px-10"
-          onClick={() => handleSortClick("stoc")}>Stoc</th>
-        <th
-          className="border-2 unstyled px-10"
-          onClick={() => handleSortClick("pret")}>Pret</th>
-        <th
-          className="border-2 px-10"
-          onClick={() => handleSortClick("dataExpirarii")}>DataExpirarii</th>
-      </tr>
-    </thead>
-    <tbody>
-      {productList.filter((product) => {
-        if (searchInput === "") {
-          return product;
-        } else if (product.numeProdus.toLowerCase().includes(searchInput.toLowerCase())) {
-          return product
-        }
-      }).map((data) => (
-        tableRows(data)
-      ))}
-    </tbody>
-  </table>
-  );
-}
+import AddNewProductModal from "./AddNewProductModal";
 
 function TableData() {
   const [productList, setProductList] = useState([]);
   const [filterdList, setFilterdList] = useState([]);
+  const [resetAllFilters, setResetAllFilters] = useState([]);
   const [isShown, setIsShown] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [order, setOrder] = useState("ASC");
-
+  
   useEffect(() => {
     setProductList(data);
     setFilterdList(data);
+    setResetAllFilters(data);
   }, []);
 
   function handleOnClick(event) {
@@ -87,20 +31,22 @@ function TableData() {
 
   const handleSortClick = (col) => {
     if (order === "ASC") {
-      const sorted = [...productList].sort((a,b) => a[col].toLowerCase() < b[col].toLowerCase() ? -1 : 1);
-      setProductList(sorted);
+      const sortedList = [...productList].sort((a,b) => 
+      a[col].toLowerCase() < b[col].toLowerCase() ? -1 : 1);
+      setProductList(sortedList);
       setOrder("DSC");
     }
     if (order === "DSC") {
-      const sorted = [...productList].sort((a, b) =>
+      const sortedList = [...productList].sort((a, b) =>
         a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1);
-      setProductList(sorted);
+      setProductList(sortedList);
       setOrder("ASC");
     }
   };
 
-
-  const handleSearchChange = (e) => setSearchInput(e.target.value);
+  const handleSearchChange = (e) => {
+  setSearchInput(e.target.value);
+  };
 
   return (
     <div>
@@ -127,7 +73,7 @@ function TableData() {
         <div>
           {
             isShown && (
-              <AddNewProduct func={addRows} />
+              <AddNewProductModal func={addRows} />
             )}
         </div>
       </div>
@@ -135,4 +81,4 @@ function TableData() {
   );
 }
 
-export default TableData;
+export default TableData
