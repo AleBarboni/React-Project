@@ -48,7 +48,7 @@ function AddNewProductModal(props) {
       defaultState();
     }
 
-    const errorMessageText = () => {
+    {/*const errorMessageText = () => {
       setErrorMessage("Nici un camp nu poate fi gol")
     };
    
@@ -65,22 +65,20 @@ function AddNewProductModal(props) {
                 onClick={transferValue}>Adauga Produs</button>
           )
       };
-    };  
+    }; 
+  */} 
        
-
-
-
-
-
     return (
-      <div className="modal">
+      <div
+        className="modal"
+        >
         <div className="modal-body">
           <button
             >X
           </button>
           <div className="flex flex-col px-5 modal-content">
             <label>NumeProdus</label>
-            <input 
+            <input
               type="text" 
               value={numeProdus} 
               onChange={handleOnChangeNumeProdus} 
@@ -124,7 +122,9 @@ function AddNewProductModal(props) {
             />
           </div>
           <div>
-            <AddProductButton />
+          <button 
+                type="button"
+                onClick={transferValue}>Adauga Produs</button>
           </div>     
         </div>
       </div>

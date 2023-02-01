@@ -17,14 +17,11 @@ function TableData() {
     setResetAllFilters(data);
   }, []);
 
-  function handleOnModalOpen() {
+  const handleOnModalOpen = () => {
     setShownAddProductModal(true);
   };
 
-  function handleOnModalClose() {
-    setShownAddProductModal(false);
-  };
-
+  
   const addRows = (data) => {
     const totalProducts = productList.length;
     data.id = totalProducts + 1;
@@ -88,4 +85,4 @@ function TableData() {
   );
 }
 
-export default TableData
+export default TableData;

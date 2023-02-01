@@ -10,6 +10,7 @@ function Table({productList, handleSortClick, handleSearchChange, searchInput}){
                 <td className="text-center border-2">{data.stoc}</td>
                 <td className="text-center border-2">{data.pret}</td>
                 <td className="text-center border-2">{data.dataExpirarii}</td>
+                <td className="text-center border-2 font-bold"><button>X</button></td>
             </tr>
         )
     }
@@ -48,6 +49,7 @@ function Table({productList, handleSortClick, handleSearchChange, searchInput}){
                         DataExpirarii
                         <h1 onClick={() => handleSortClick("dataExpirarii")}>↑↓</h1>
                     </th>
+                    <th className="border-2 px-2"></th>
                 </tr>
             </thead>
             <tbody>
