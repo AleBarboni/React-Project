@@ -10,6 +10,7 @@ function TableData() {
   const [shownAddProductModal, setShownAddProductModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [order, setOrder] = useState("ASC");
+ 
   
   useEffect(() => {
     setProductList(data);
@@ -21,12 +22,10 @@ function TableData() {
     setShownAddProductModal(true);
   };
 
-  
   const addRows = (data) => {
     const totalProducts = productList.length;
     data.id = totalProducts + 1;
-    const updatedProduct = [...productList];
-    updatedProduct.push(data);
+    const updatedProduct = [data, ...productList];
     setProductList(updatedProduct);
   };
   
@@ -77,7 +76,6 @@ function TableData() {
               <AddNewProductModal 
                 func={addRows}
                 />
-
             )}
         </div>
       </div>
