@@ -7,6 +7,7 @@ function AddNewProductModal(props) {
     const [stoc, setStoc] = useState('');
     const [pret, setPret] = useState('');
     const [dataExpirarii, setDataExpirarii] = useState('');
+    const [errorMessage, setErrorMessage] = useState("");
     
     const handleOnChangeNumeProdus = (event) => {
       setNumeProdus(event.target.value);
@@ -38,22 +39,38 @@ function AddNewProductModal(props) {
       const product = {
         numeProdus,
         eliberare,
-        stoc,
+        eliberare,
         pret,
         dataExpirarii
       };
 
       props.func(product);
       defaultState();
-    };
+    }
 
-    function handleEmptyInput(event){
-      if (event.target.value === "") {
-        return <h1>Nici un camp nu poate fi gol</h1>
-      }
-    
-      return transferValue;
+    const errorMessageText = () => {
+      setErrorMessage("Nici un camp nu poate fi gol")
     };
+   
+    function AddProductButton () {
+      if (numeProdus || eliberare || eliberare || pret || dataExpirarii === ""){
+        return (
+            <button 
+            onClick={errorMessageText}
+            type="button" disabled>Adauga Produs</button>
+        )} else if (numeProdus || eliberare || eliberare || pret || dataExpirarii === !""){
+          return (
+              <button 
+                type="button"
+                onClick={transferValue}>Adauga Produs</button>
+          )
+      };
+    };  
+       
+
+
+
+
 
     return (
       <div className="modal">
@@ -73,7 +90,7 @@ function AddNewProductModal(props) {
           <div className="flex flex-col px-5 modal-content">
             <label>Forma Eliberare</label>
             <select name="pets" id="pet-select" className='border-2 input-text'>
-              <option value="">Alege tipul de eliberare</option>
+              <option value="">Alege forma de eliberare</option>
               <option value="OTC">OTC</option>
               <option value="P6L">P6L</option>
               <option value="PRF">PRF</option>
@@ -107,15 +124,11 @@ function AddNewProductModal(props) {
             />
           </div>
           <div>
-            <button 
-              onClick={transferValue}
-              className='px-10 border-2 modal-content button'>
-              Adauga Produs
-            </button>  
+            <AddProductButton />
           </div>     
         </div>
       </div>
     );
-  }
+  };
 
 export default AddNewProductModal;

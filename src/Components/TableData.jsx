@@ -17,11 +17,11 @@ function TableData() {
     setResetAllFilters(data);
   }, []);
 
-  function handleOnModalOpen(event) {
+  function handleOnModalOpen() {
     setShownAddProductModal(true);
   };
 
-  function handleOnModalClose(event) {
+  function handleOnModalClose() {
     setShownAddProductModal(false);
   };
 
