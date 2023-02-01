@@ -1,4 +1,5 @@
 import { useState } from "react";
+import data from "./data";
 
 function AddNewProductModal(props) {
     const [numeProdus, setNumeProdus] = useState('');
@@ -37,7 +38,6 @@ function AddNewProductModal(props) {
 
     const transferValue = (event) => {
       event.preventDefault();
-    };
 
       const product = {
         numeProdus,
@@ -49,12 +49,23 @@ function AddNewProductModal(props) {
 
       props.func(product);
       defaultState();
+    };
+
+    function handleEmptyInput(event){
+      if (event.target.value === "") {
+        return <h1>Nici un camp nu poate fi gol</h1>
+      }
     
+      return transferValue;
+    };
+
     return (
-      <div 
-        className="modal">
+      <div className="modal">
         <div className="modal-body">
-          <div className="border-2 flex flex-col px-5 modal-content">
+          <button
+            >X
+          </button>
+          <div className="flex flex-col px-5 modal-content">
             <label>NumeProdus</label>
             <input 
               type="text" 

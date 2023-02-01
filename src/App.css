@@ -29,14 +29,15 @@ input[type="nubmer"] {
 
 .modal-body {
   width: 600px;
-background-color: gray;
-opacity: 1;
-color: white;
+  background-color: rgb(245 245 245);
+  opacity: 1;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 
 label {
-  color: white;
+  color: black;
   padding: 10px 10px;
 }
 
@@ -48,6 +49,11 @@ label {
 .modal button {
   border: 2px solid black;
   border-radius: 10px;
-  width: 300px;
+  padding: 0 10px 0 10px;
   margin: 5px;
+}
+
+th h1 {
+  display: inline;
+  margin-left: 20px;
 }

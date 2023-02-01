@@ -7,7 +7,7 @@ function TableData() {
   const [productList, setProductList] = useState([]);
   const [filterdList, setFilterdList] = useState([]);
   const [resetAllFilters, setResetAllFilters] = useState([]);
-  const [isShown, setIsShown] = useState(false);
+  const [shownAddProductModal, setShownAddProductModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [order, setOrder] = useState("ASC");
   
@@ -17,9 +17,13 @@ function TableData() {
     setResetAllFilters(data);
   }, []);
 
-  function handleOnClick(event) {
-    setIsShown(true);
-  }
+  function handleOnModalOpen(event) {
+    setShownAddProductModal(true);
+  };
+
+  function handleOnModalClose(event) {
+    setShownAddProductModal(false);
+  };
 
   const addRows = (data) => {
     const totalProducts = productList.length;
@@ -28,7 +32,7 @@ function TableData() {
     updatedProduct.push(data);
     setProductList(updatedProduct);
   };
-
+  
   const handleSortClick = (col) => {
     if (order === "ASC") {
       const sortedList = [...productList].sort((a,b) => 
@@ -49,7 +53,7 @@ function TableData() {
   };
 
   return (
-    <div>
+    <div key={data.id}>
       <div>
         <div className="bg-neutral-100">
           <button className="border-2 px-10 mx-11 my-2 bg-neutral-100 font-bold">
@@ -67,13 +71,16 @@ function TableData() {
       <div className="text-center mt-5">
         <button
           className='px-10 border-2'
-          onClick={handleOnClick}>
+          onClick={handleOnModalOpen}>
           Intrare Noua
         </button>
         <div>
           {
-            isShown && (
-              <AddNewProductModal func={addRows} />
+            shownAddProductModal && (
+              <AddNewProductModal 
+                func={addRows}
+                />
+
             )}
         </div>
       </div>

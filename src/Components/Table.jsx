@@ -1,3 +1,4 @@
+import data from "./data";
 
 function Table({productList, handleSortClick, handleSearchChange, searchInput}){
 
@@ -16,9 +17,9 @@ function Table({productList, handleSortClick, handleSearchChange, searchInput}){
     return (
         <table className="table-auto text-center w-full">
             <thead>
-                <tr>
+                <tr key={data.id}>
                     <th
-                        className="border-2 px-10 text-start flex items-center justify-between">
+                        className="border-2 px-10 text-start items-center">
                         NumeProdus
                         <input
                         className="border-2 m-2 px-2"
