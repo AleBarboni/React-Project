@@ -12,10 +12,6 @@ function AddNewProductModal(props) {
       setNumeProdus(event.target.value);
     };
     
-    const handleOnChangeEliberare = (event) => {
-      setEliberare(event.target.value)
-    }
-
     const handleOnChangeStoc = (event) => {
       setStoc(event.target.value);
     };
@@ -76,12 +72,12 @@ function AddNewProductModal(props) {
           </div>
           <div className="flex flex-col px-5 modal-content">
             <label>Forma Eliberare</label>
-            <input
-              type="text"
-              value={eliberare}
-              onChange={handleOnChangeEliberare}
-              className='border-2 input-text'
-            />
+            <select name="pets" id="pet-select" className='border-2 input-text'>
+              <option value="">Alege tipul de eliberare</option>
+              <option value="OTC">OTC</option>
+              <option value="P6L">P6L</option>
+              <option value="PRF">PRF</option>
+            </select>
           </div>
           <div className="flex flex-col px-5 modal-content">
             <label>Stoc</label>
