@@ -57,3 +57,7 @@ th h1 {
   display: inline;
   margin-left: 20px;
 }
+
+th h1:hover {
+  cursor: pointer;
+}

@@ -1,6 +1,6 @@
 import data from "./data";
 
-function Table({productList, handleSortClick, handleSearchChange, searchInput}){
+function Table({productList, handleSortClick, handleSearchChange, searchInput, handleSortNumbersClick}){
 
     function tableProductRow(data) {
         return (
@@ -37,12 +37,12 @@ function Table({productList, handleSortClick, handleSearchChange, searchInput}){
                     <th
                         className="border-2 px-10">
                         Stoc
-                        <h1 onClick={() => handleSortClick("stoc")}>↑↓</h1>
+                        <h1 onClick={() => handleSortNumbersClick("stoc")}>↑↓</h1>
                     </th>
                     <th
                         className="border-2 unstyled px-10">
                         Pret
-                        <h1 onClick={() => handleSortClick("pret")}>↑↓</h1>
+                        <h1 onClick={() => handleSortNumbersClick("pret")}>↑↓</h1>
                     </th>
                     <th
                         className="border-2 px-10">

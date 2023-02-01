@@ -10,6 +10,7 @@ function TableData() {
   const [shownAddProductModal, setShownAddProductModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [order, setOrder] = useState("ASC");
+  const [orderNumbers, setOrderNumbers] = useState("ASC");
  
   
   useEffect(() => {
@@ -44,6 +45,21 @@ function TableData() {
     }
   };
 
+  const handleSortNumbersClick = (col) => {
+    if (orderNumbers === "ASC") {
+      const sortedList = [...productList].sort((a,b) => 
+      a[col] < b[col] ? -1 : 1);
+      setProductList(sortedList);
+      setOrderNumbers("DSC");
+    }
+    if (orderNumbers === "DSC") {
+      const sortedList = [...productList].sort((a, b) =>
+        a[col] < b[col] ? 1 : -1);
+      setProductList(sortedList);
+      setOrderNumbers("ASC");
+    }
+  };
+
   const handleSearchChange = (e) => {
   setSearchInput(e.target.value);
   };
@@ -60,6 +76,7 @@ function TableData() {
         <Table
           handleSortClick={handleSortClick}
           handleSearchChange={handleSearchChange}
+          handleSortNumbersClick={handleSortNumbersClick}
           productList={productList}
           searchInput={searchInput}
         />
