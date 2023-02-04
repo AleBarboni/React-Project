@@ -68,12 +68,14 @@ function TableData() {
   setSearchInput(e.target.value);
   };
 
+
   return (
     <div key={data.id}>
       <div>
         <div className="bg-neutral-100">
-          <button className="border-2 px-10 mx-11 my-2 bg-neutral-100 font-bold">
-            Sterge toate filtrele
+          <button 
+            className="border-2 px-10 mx-11 my-2 bg-neutral-100 font-bold">
+              Sterge toate filtrele
           </button>
         </div>
         {/* Aici se va pasa filterdList */}

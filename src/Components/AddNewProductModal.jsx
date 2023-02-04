@@ -29,9 +29,7 @@ function AddNewProductModal(props) {
     setDataExpirarii(event.target.value);
   };
 
-  //TODO defaultState nu indica o actiune, l-as numi resetFormState
-  //sau reset to defaultState
-  const defaultState = () => {
+  const resetFormState = () => {
     setNumeProdus('');
     setEliberare('');
     setStoc('');
@@ -39,37 +37,34 @@ function AddNewProductModal(props) {
     setDataExpirarii('');
   };
 
-  //TODO transfer are cumva sens, dar la final el de fapt face addNewProduct, asa ca
-  // l-as redenumi astfel
-  const transferValue = (event) => {
+  const addNewProductValue = (event) => {
     event.preventDefault();
 
-    const product = {
+    const productObjectKeys = {
       numeProdus,
       eliberare,
+      stoc,
       pret,
       dataExpirarii
     };
 
-    //TODO redenumeste acest prop fiindca func nu este suficient de descriptiv
-    props.func(product);
-    defaultState();
+    props.func(productObjectKeys);
+    resetFormState();
   }
 
   const isValid = (value) => value !== "";
 
   const isFormButtonEnabled = useMemo(() => {
-    //TODO in cazul in care validarile difera in functie de tipul de date
-    //se vor adauga noi functii de tipul isValid
-    console.log(numeProdus,eliberare,pret,dataExpirarii)
-    //TODO de adaugat si stoc la validare
+  
+    console.log(numeProdus, eliberare, stoc, pret, dataExpirarii)
     return (
       isValid(numeProdus) &&
       isValid(eliberare) &&
+      isValid(stoc) &&
       isValid(pret) &&
       isValid(dataExpirarii)
     );
-  }, [numeProdus,eliberare,pret,dataExpirarii]);
+  }, [numeProdus, eliberare, stoc, pret, dataExpirarii]);
 
   return (
     <div
@@ -130,7 +125,7 @@ function AddNewProductModal(props) {
             disabled={!isFormButtonEnabled}
             type="button"
             className={isFormButtonEnabled ? "bg-green-500" : "bg-red-500"}
-            onClick={transferValue}>
+            onClick={addNewProductValue}>
               Adauga Produs
           </button>
         </div>
