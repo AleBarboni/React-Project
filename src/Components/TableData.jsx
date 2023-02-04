@@ -23,6 +23,10 @@ function TableData() {
     setShownAddProductModal(true);
   };
 
+  const handleModalClose = () => {
+    setShownAddProductModal(false);
+  };
+
   const addRows = (data) => {
     const totalProducts = productList.length;
     data.id = totalProducts + 1;
@@ -92,7 +96,8 @@ function TableData() {
             shownAddProductModal && (
               <AddNewProductModal 
                 func={addRows}
-                />
+                handleModalClose={handleModalClose}
+              />
             )}
         </div>
       </div>
